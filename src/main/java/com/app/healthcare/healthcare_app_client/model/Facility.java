@@ -1,5 +1,7 @@
 package com.app.healthcare.healthcare_app_client.model;
 
+import java.util.List;
+
 public class Facility {
 
     private Long id;
@@ -7,6 +9,8 @@ public class Facility {
     private String address;
     private String email;
     private String imageUrl;
+    private List<Provider> providers;
+    private List<Patient> patients;
 
     public Facility() {
     }
@@ -51,6 +55,22 @@ public class Facility {
         this.imageUrl = imageUrl;
     }
 
+    public List<Provider> getProviders() {
+        return providers;
+    }
+
+    public void setProviders(List<Provider> providers) {
+        this.providers = providers;
+    }
+
+    public List<Patient> getPatients() {
+        return patients;
+    }
+
+    public void setPatients(List<Patient> patients) {
+        this.patients = patients;
+    }
+
     @Override
     public String toString() {
         return "Facility{" +
@@ -59,6 +79,8 @@ public class Facility {
                 ", address='" + address + '\'' +
                 ", email='" + email + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
+                ", providers=" + providers +
+                ", patients=" + patients +
                 '}';
     }
 }

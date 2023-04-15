@@ -4,6 +4,9 @@ module com.app.healthcare.healthcare_app_client {
 
     requires org.controlsfx.controls;
 
+    requires spring.web;
+
+
     opens com.app.healthcare.healthcare_app_client to javafx.fxml;
     exports com.app.healthcare.healthcare_app_client;
     exports com.app.healthcare.healthcare_app_client.controller.view;

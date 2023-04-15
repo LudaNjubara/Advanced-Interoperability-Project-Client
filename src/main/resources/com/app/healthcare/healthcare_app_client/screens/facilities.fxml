@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="facilitiesContentContainer" prefHeight="600.0" prefWidth="612.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.healthcare.healthcare_app_client.controller.screen.FacilityController">
+<AnchorPane fx:id="facilitiesContentContainer" prefHeight="600.0" prefWidth="612.0" style="-fx-background-color: #5CDB95;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.healthcare.healthcare_app_client.controller.screen.FacilityController">
     <children>
         <Label alignment="TOP_CENTER" layoutX="30.0" layoutY="40.0" text="Facilities screen" textFill="#edf5e1" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
             <font>

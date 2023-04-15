@@ -2,8 +2,7 @@ package com.app.healthcare.healthcare_app_client.model;
 
 public class Provider {
 
-    private Long id;
-    private Facility facility;
+    private Long facilityId;
     private String firstName;
     private String lastName;
     private String address;
@@ -15,9 +14,8 @@ public class Provider {
     public Provider() {
     }
 
-    public Provider(Long id, Facility facility, String firstName, String lastName, String address, String phoneNumber, String email, String oib, String imageUrl) {
-        this.id = id;
-        this.facility = facility;
+    public Provider(Long facilityId, String firstName, String lastName, String address, String phoneNumber, String email, String oib, String imageUrl) {
+        this.facilityId = facilityId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -27,20 +25,12 @@ public class Provider {
         this.imageUrl = imageUrl;
     }
 
-    public Long getId() {
-        return id;
+    public Long getFacilityId() {
+        return facilityId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Facility getFacility() {
-        return facility;
-    }
-
-    public void setFacility(Facility facility) {
-        this.facility = facility;
+    public void setFacilityId(Long facilityId) {
+        this.facilityId = facilityId;
     }
 
     public String getFirstName() {
@@ -102,8 +92,7 @@ public class Provider {
     @Override
     public String toString() {
         return "Provider{" +
-                "id=" + id +
-                ", facility=" + facility +
+                ", facilityId=" + facilityId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", address='" + address + '\'' +
