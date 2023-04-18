@@ -13,4 +13,6 @@ module com.app.healthcare.healthcare_app_client {
     opens com.app.healthcare.healthcare_app_client.controller.view to javafx.fxml;
     exports com.app.healthcare.healthcare_app_client.controller.screen;
     opens com.app.healthcare.healthcare_app_client.controller.screen to javafx.fxml;
+
+    exports com.app.healthcare.healthcare_app_client.model;
 }

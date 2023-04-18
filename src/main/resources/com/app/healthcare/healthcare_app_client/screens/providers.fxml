@@ -139,7 +139,14 @@
                                     </DropShadow>
                                  </effect>
                               </TextField>
-                              <ComboBox prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                              <ComboBox fx:id="facilityComboBox" maxWidth="170.0" prefHeight="29.0" prefWidth="171.0" style="-fx-background-color: #379683;" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                                 <effect>
+                                    <DropShadow height="20.0" radius="9.5" width="20.0">
+                                       <color>
+                                          <Color opacity="0.4000000059604645" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect></ComboBox>
                               <Label text="Facility:" textFill="#edf5e1" GridPane.columnIndex="2" GridPane.rowIndex="3">
                                  <font>
                                     <Font name="Roboto Light" size="14.0" />
@@ -147,7 +154,7 @@
                               </Label>
                            </children>
                         </GridPane>
-                        <Button fx:id="addProviderButton" layoutX="183.0" layoutY="256.0" mnemonicParsing="false" onAction="#handleAddProviderFormSubmit" prefHeight="44.0" prefWidth="271.0" style="-fx-background-color: #085099;" text="Add provider" textFill="#edf5e1">
+                        <Button fx:id="addProviderButton" layoutX="183.0" layoutY="256.0" mnemonicParsing="false" onAction="#handleAddProviderButtonClick" prefHeight="44.0" prefWidth="271.0" style="-fx-background-color: #085099;" text="Add provider" textFill="#edf5e1">
                            <font>
                               <Font name="Roboto Light" size="18.0" />
                            </font>

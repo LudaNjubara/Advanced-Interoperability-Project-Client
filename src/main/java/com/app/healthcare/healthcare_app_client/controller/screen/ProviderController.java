@@ -1,28 +1,23 @@
 package com.app.healthcare.healthcare_app_client.controller.screen;
 
+import com.app.healthcare.healthcare_app_client.model.Facility;
 import com.app.healthcare.healthcare_app_client.model.Provider;
 import com.app.healthcare.healthcare_app_client.utils.Utils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
+
+import static com.app.healthcare.healthcare_app_client.utils.Utils.setupRestTemplate;
 
 public class ProviderController implements Initializable {
 
-    private final String BASE_URL = "http://localhost:8081/api/providers";
+    private Facility[] facilities;
 
     @FXML
     private TableView<Provider> currentProvidersTable;
@@ -57,6 +52,8 @@ public class ProviderController implements Initializable {
     private TextField oibTextField;
     @FXML
     private TextField imageURLTextField;
+    @FXML
+    private ComboBox<String> facilityComboBox;
 
     @FXML
     private Button addProviderButton;
@@ -64,6 +61,11 @@ public class ProviderController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        setupTable();
+        setupFacilitiesComboBox();
+    }
+
+    private void setupTable() {
         firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
@@ -71,10 +73,62 @@ public class ProviderController implements Initializable {
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
         oibColumn.setCellValueFactory(new PropertyValueFactory<>("oib"));
         imageURLColumn.setCellValueFactory(new PropertyValueFactory<>("imageURL"));
+
+        currentProvidersTable.getItems().clear();
+        currentProvidersTable.getItems().addAll(fetchAllProviders());
+    }
+
+    private void setupFacilitiesComboBox() {
+        facilities = fetchAllFacilities();
+        for (Facility facility : facilities) {
+            facilityComboBox.getItems().add(facility.getName());
+        }
+    }
+
+    private Provider[] fetchAllProviders() {
+        Provider[] returnedProviders = null;
+        String URL = "http://localhost:8081/api/providers";
+
+        RestTemplate restTemplate = setupRestTemplate();
+
+        try {
+            ResponseEntity<Provider[]> responseEntity = restTemplate.getForEntity(URL, Provider[].class);
+
+            if (responseEntity.getStatusCode().is2xxSuccessful()) {
+                returnedProviders = responseEntity.getBody();
+            } else {
+                System.out.println("Request failed with status code: " + responseEntity.getStatusCode());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return returnedProviders;
+    }
+
+    private Facility[] fetchAllFacilities() {
+        Facility[] returnedFacilities = null;
+        String URL = "http://localhost:8081/api/facilities";
+
+        RestTemplate restTemplate = setupRestTemplate();
+
+        try {
+            ResponseEntity<Facility[]> responseEntity = restTemplate.getForEntity(URL, Facility[].class);
+
+            if (responseEntity.getStatusCode().is2xxSuccessful()) {
+                returnedFacilities = responseEntity.getBody();
+            } else {
+                System.out.println("Request failed with status code: " + responseEntity.getStatusCode());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return returnedFacilities;
     }
 
     @FXML
-    public void handleAddProviderFormSubmit() {
+    public void handleAddProviderButtonClick() {
         String firstName = firstNameTextField.getText();
         String lastName = lastNameTextField.getText();
         String address = addressTextField.getText();
@@ -82,28 +136,26 @@ public class ProviderController implements Initializable {
         String email = emailTextField.getText();
         String oib = oibTextField.getText();
         String imageURL = imageURLTextField.getText();
-        Long facilityId = 2L;
+        // Get facility ID from facility name
+        String facilityName = facilityComboBox.getValue();
+        Long facilityId = null;
+        for (Facility facility : facilities) {
+            if (facility.getName().equals(facilityName)) {
+                facilityId = facility.getId();
+                break;
+            }
+        }
 
-        RestTemplate restTemplate = new RestTemplate();
-        List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
-        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-        List<MediaType> mediaTypes = new ArrayList<>();
-        mediaTypes.add(MediaType.APPLICATION_JSON);
-        converter.setSupportedMediaTypes(mediaTypes);
-        messageConverters.add(converter);
-        restTemplate.setMessageConverters(messageConverters);
+        RestTemplate restTemplate = setupRestTemplate();
 
         Provider provider = new Provider(facilityId, firstName, lastName, address, phoneNumber, email, oib, imageURL);
 
         try {
+            String BASE_URL = "http://localhost:8081/api/providers";
             ResponseEntity<Provider> responseEntity = restTemplate.postForEntity(BASE_URL, provider, Provider.class);
 
             if (responseEntity.getStatusCode().is2xxSuccessful()) {
-                Provider providerResponse = responseEntity.getBody();
-
-                System.out.println(providerResponse);
                 Utils.showNotification("Success", "Provider created successfully.", addProviderButton);
-
                 clearFields();
             } else {
                 System.out.println("Request failed with status code: " + responseEntity.getStatusCode());
@@ -122,5 +174,6 @@ public class ProviderController implements Initializable {
         emailTextField.clear();
         oibTextField.clear();
         imageURLTextField.clear();
+        facilityComboBox.getSelectionModel().clearSelection();
     }
 }

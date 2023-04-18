@@ -4,6 +4,13 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Utils {
     public static void showNotification(String title, String message, Node parent) {
@@ -14,5 +21,17 @@ public class Utils {
                 .hideAfter(Duration.seconds(5))
                 .owner(parent.getScene().getWindow());
         notifications.show();
+    }
+
+    public static RestTemplate setupRestTemplate() {
+        RestTemplate restTemplate = new RestTemplate();
+        List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+        List<MediaType> mediaTypes = new ArrayList<>();
+        mediaTypes.add(MediaType.APPLICATION_JSON);
+        converter.setSupportedMediaTypes(mediaTypes);
+        messageConverters.add(converter);
+        restTemplate.setMessageConverters(messageConverters);
+        return restTemplate;
     }
 }
