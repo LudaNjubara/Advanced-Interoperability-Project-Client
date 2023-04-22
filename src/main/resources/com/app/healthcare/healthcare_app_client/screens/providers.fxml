@@ -166,6 +166,17 @@
                               </DropShadow>
                            </effect>
                         </Button>
+                        <Button fx:id="editProviderButton" layoutX="183.0" layoutY="256.0" mnemonicParsing="false" onAction="#handleEditProviderButtonClick" prefHeight="44.0" prefWidth="271.0" style="-fx-background-color: #085099;" text="Edit provider" textFill="#edf5e1">
+                           <effect>
+                              <DropShadow height="20.0" radius="9.5" width="20.0">
+                                 <color>
+                                    <Color opacity="0.44999998807907104" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                           <font>
+                              <Font name="Roboto Light" size="18.0" />
+                           </font></Button>
                      </children>
                   </Pane>
                </children>

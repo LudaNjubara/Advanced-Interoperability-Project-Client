@@ -2,6 +2,8 @@ package com.app.healthcare.healthcare_app_client.utils;
 
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import org.springframework.http.MediaType;
@@ -33,5 +35,16 @@ public class Utils {
         messageConverters.add(converter);
         restTemplate.setMessageConverters(messageConverters);
         return restTemplate;
+    }
+
+    public static ContextMenu setupTableViewContextMenu() {
+        ContextMenu contextMenu = new ContextMenu();
+        MenuItem deleteMenuItem = new MenuItem("Delete");
+        MenuItem editMenuItem = new MenuItem("Edit");
+
+        contextMenu.getItems().add(deleteMenuItem);
+        contextMenu.getItems().add(editMenuItem);
+
+        return contextMenu;
     }
 }
