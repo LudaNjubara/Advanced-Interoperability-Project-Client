@@ -15,6 +15,13 @@ public class Facility {
     public Facility() {
     }
 
+    public Facility(String name, String address, String email, String imageURL) {
+        this.name = name;
+        this.address = address;
+        this.email = email;
+        this.imageUrl = imageURL;
+    }
+
     public Long getId() {
         return id;
     }
