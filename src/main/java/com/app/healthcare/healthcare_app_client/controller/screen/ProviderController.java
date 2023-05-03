@@ -223,7 +223,7 @@ public class ProviderController implements Initializable {
             }
             return new SimpleStringProperty("");
         });
-        appointmentDateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        appointmentDateColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentDate"));
 
         currentAppointmentsTable.getItems().clear();
     }
@@ -293,8 +293,6 @@ public class ProviderController implements Initializable {
             if (facility_iterable.getName().equals(facilityName)) {
                 facility = facility_iterable;
                 break;
-            } else {
-                throw new RuntimeException("Facility not found with name: " + facilityName);
             }
         }
 
