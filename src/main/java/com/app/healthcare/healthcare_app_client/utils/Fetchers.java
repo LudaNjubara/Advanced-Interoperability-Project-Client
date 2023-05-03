@@ -54,7 +54,49 @@ public class Fetchers {
         return returnedProviders;
     }
 
+    public static Provider fetchProviderByPatientId(Long patientId) {
+        Provider returnedProvider = null;
+        String URL = "http://localhost:8081/api/providers?patientId=" + patientId;
+
+        RestTemplate restTemplate = setupRestTemplate();
+
+        try {
+            ResponseEntity<Provider> responseEntity = restTemplate.getForEntity(URL, Provider.class);
+
+            if (responseEntity.getStatusCode().is2xxSuccessful()) {
+                returnedProvider = responseEntity.getBody();
+            } else {
+                System.out.println("Request failed with status code: " + responseEntity.getStatusCode());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return returnedProvider;
+    }
+
     // PATIENT FETCHERS
+    public static Patient[] fetchAllPatients() {
+        Patient[] returnedPatients = null;
+        String URL = "http://localhost:8081/api/patients";
+
+        RestTemplate restTemplate = setupRestTemplate();
+
+        try {
+            ResponseEntity<Patient[]> responseEntity = restTemplate.getForEntity(URL, Patient[].class);
+
+            if (responseEntity.getStatusCode().is2xxSuccessful()) {
+                returnedPatients = responseEntity.getBody();
+            } else {
+                System.out.println("Request failed with status code: " + responseEntity.getStatusCode());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return returnedPatients;
+    }
+
     public static Patient[] fetchAllPatientsByFacilityId(Long facilityId) {
         Patient[] returnedPatients = null;
         String URL = "http://localhost:8081/api/patients?facilityId=" + facilityId;

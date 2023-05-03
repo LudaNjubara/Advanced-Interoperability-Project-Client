@@ -2,10 +2,14 @@ package com.app.healthcare.healthcare_app_client.model;
 
 public class Patient {
 
+
     private Long id;
     private String firstName;
     private String lastName;
     private Facility facility;
+    private Long facilityId;
+    private Provider provider;
+    private Long providerId;
     private String address;
     private String phoneNumber;
     private String dateOfBirth;
@@ -15,16 +19,28 @@ public class Patient {
     public Patient() {
     }
 
-    public Patient(Long id, String firstName, String lastName, Facility facility, String address, String phoneNumber, String dateOfBirth, String oib, String imageUrl) {
-        this.id = id;
+    public Patient(String firstName, String lastName, Long facilityId, Long providerId, String address, String phoneNumber, String dob, String oib, String imageURL) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.facilityId = facilityId;
+        this.providerId = providerId;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.dateOfBirth = dob;
+        this.oib = oib;
+        this.imageUrl = imageURL;
+    }
+
+    public Patient(String firstName, String lastName, Facility facility, Provider provider, String address, String phoneNumber, String dob, String oib, String imageURL) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.facility = facility;
+        this.provider = provider;
         this.address = address;
         this.phoneNumber = phoneNumber;
-        this.dateOfBirth = dateOfBirth;
+        this.dateOfBirth = dob;
         this.oib = oib;
-        this.imageUrl = imageUrl;
+        this.imageUrl = imageURL;
     }
 
     public Long getId() {
@@ -57,6 +73,30 @@ public class Patient {
 
     public void setFacility(Facility facility) {
         this.facility = facility;
+    }
+
+    public Long getFacilityId() {
+        return facilityId;
+    }
+
+    public void setFacilityId(Long facilityId) {
+        this.facilityId = facilityId;
+    }
+
+    public Provider getProvider() {
+        return provider;
+    }
+
+    public void setProvider(Provider provider) {
+        this.provider = provider;
+    }
+
+    public Long getProviderId() {
+        return providerId;
+    }
+
+    public void setProviderId(Long providerId) {
+        this.providerId = providerId;
     }
 
     public String getAddress() {
@@ -106,6 +146,9 @@ public class Patient {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", facility=" + facility +
+                ", facilityId=" + facilityId +
+                ", provider=" + provider +
+                ", providerId=" + providerId +
                 ", address='" + address + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", dateOfBirth='" + dateOfBirth + '\'' +
