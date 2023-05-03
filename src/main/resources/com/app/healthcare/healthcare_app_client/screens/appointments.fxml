@@ -2,7 +2,9 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane fx:id="appointmentsContentContainer" prefHeight="600.0" prefWidth="612.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.healthcare.healthcare_app_client.controller.screen.AppointmentController">
@@ -12,6 +14,187 @@
                 <Font name="Roboto Light" size="36.0" />
             </font>
         </Label>
+        <TableView fx:id="currentAppointmentsTable" layoutX="30.0" layoutY="105.0" prefHeight="274.0" prefWidth="769.0" style="-fx-background-color: #379683; -fx-border-width: 2px; -fx-border-color: #EDF5E1; -fx-border-radius: 2px;">
+            <columns>
+                <TableColumn fx:id="titleColumn" prefWidth="105.0" text="Title" />
+                <TableColumn fx:id="descriptionColumn" prefWidth="132.0" text="Description" />
+                <TableColumn fx:id="facilityColumn" minWidth="0.0" prefWidth="119.0" text="Facility" />
+                <TableColumn fx:id="providerColumn" prefWidth="137.0" text="Provider" />
+            <TableColumn fx:id="patientColumn" prefWidth="133.0" text="Patient" />
+            <TableColumn fx:id="dateColumn" prefWidth="132.0" text="Date" />
+            </columns>
+        </TableView>
+        <Accordion layoutX="30.0" layoutY="432.0" prefHeight="369.0" prefWidth="769.0">
+            <panes>
+                <TitledPane prefHeight="141.0" prefWidth="769.0" text="Add an appointment" textFill="#05386b">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="279.0" prefWidth="767.0" style="-fx-background-color: #379683; -fx-border-width: 2px; -fx-border-color: #EDF5E1; -fx-border-radius: 2px;">
+                            <children>
+                                <GridPane layoutX="50.0" layoutY="23.0" prefHeight="156.0" prefWidth="664.0">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="126.0" minWidth="10.0" prefWidth="95.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="207.0" minWidth="10.0" prefWidth="207.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="147.0" minWidth="10.0" prefWidth="104.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="275.0" minWidth="10.0" prefWidth="250.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="65.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="56.0" minHeight="31.0" prefHeight="56.0" />
+                                    </rowConstraints>
+                                    <children>
+                                        <Label text="Title:" textFill="#edf5e1">
+                                            <font>
+                                                <Font name="Roboto Light" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label text="Description:" textFill="#edf5e1" GridPane.columnIndex="2">
+                                            <font>
+                                                <Font name="Roboto Light" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label text="Date:" textFill="#edf5e1" GridPane.rowIndex="1">
+                                            <font>
+                                                <Font name="Roboto Light" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <TextField fx:id="titleTextField" maxWidth="170.0" prefHeight="29.0" prefWidth="170.0" style="-fx-background-color: #379683;" GridPane.columnIndex="1">
+                                            <effect>
+                                                <DropShadow blurType="GAUSSIAN" height="20.0" radius="9.5" width="20.0">
+                                                    <color>
+                                                        <Color opacity="0.4000000059604645" />
+                                                    </color>
+                                                </DropShadow>
+                                            </effect>
+                                        </TextField>
+                                        <TextField fx:id="dateTextField" layoutX="116.0" layoutY="21.0" maxWidth="170.0" prefHeight="29.0" prefWidth="157.0" style="-fx-background-color: #379683;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                            <effect>
+                                                <DropShadow blurType="GAUSSIAN" height="20.0" radius="9.5" width="20.0">
+                                                    <color>
+                                                        <Color opacity="0.4000000059604645" />
+                                                    </color>
+                                                </DropShadow>
+                                            </effect>
+                                        </TextField>
+                                        <TextField fx:id="descriptionTextField" layoutX="116.0" layoutY="21.0" maxWidth="170.0" prefHeight="29.0" prefWidth="170.0" style="-fx-background-color: #379683;" GridPane.columnIndex="3">
+                                            <effect>
+                                                <DropShadow blurType="GAUSSIAN" height="20.0" radius="9.5" width="20.0">
+                                                    <color>
+                                                        <Color opacity="0.4000000059604645" />
+                                                    </color>
+                                                </DropShadow>
+                                            </effect>
+                                        </TextField>
+                                        <Label text="Provider:" textFill="#edf5e1" GridPane.rowIndex="2">
+                                            <font>
+                                                <Font name="Roboto Light" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label text="Patient:" textFill="#edf5e1" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                            <font>
+                                                <Font name="Roboto Light" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <ComboBox fx:id="providerComboBox" maxWidth="170.0" onAction="#handleProviderComboBoxChange" prefHeight="29.0" prefWidth="171.0" style="-fx-background-color: #379683;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                            <effect>
+                                                <DropShadow height="20.0" radius="9.5" width="20.0">
+                                                    <color>
+                                                        <Color opacity="0.4000000059604645" />
+                                                    </color>
+                                                </DropShadow>
+                                            </effect>
+                                        </ComboBox>
+                                        <ComboBox fx:id="patientComboBox" maxWidth="170.0" prefHeight="29.0" prefWidth="171.0" style="-fx-background-color: #379683;" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                            <effect>
+                                                <DropShadow height="20.0" radius="9.5" width="20.0">
+                                                    <color>
+                                                        <Color opacity="0.4000000059604645" />
+                                                    </color>
+                                                </DropShadow>
+                                            </effect>
+                                        </ComboBox>
+
+                                    </children>
+                                </GridPane>
+                                <Button fx:id="addAppointmentButton" layoutX="249.0" layoutY="193.0" mnemonicParsing="false" onAction="#handleAddAppointmentButtonClick" prefHeight="44.0" prefWidth="271.0" style="-fx-background-color: #085099;" text="Add appointment" textFill="#edf5e1">
+                                    <font>
+                                        <Font name="Roboto Light" size="18.0" />
+                                    </font>
+                                    <effect>
+                                        <DropShadow height="20.0" radius="9.5" width="20.0">
+                                            <color>
+                                                <Color opacity="0.44999998807907104" />
+                                            </color>
+                                        </DropShadow>
+                                    </effect>
+                                </Button>
+                                <Button fx:id="editAppointmentButton" layoutX="249.0" layoutY="193.0" mnemonicParsing="false" onAction="#handleEditAppointmentButtonClick" prefHeight="44.0" prefWidth="271.0" style="-fx-background-color: #085099;" text="Edit appointment" textFill="#edf5e1">
+                                    <effect>
+                                        <DropShadow height="20.0" radius="9.5" width="20.0">
+                                            <color>
+                                                <Color opacity="0.44999998807907104" />
+                                            </color>
+                                        </DropShadow>
+                                    </effect>
+                                    <font>
+                                        <Font name="Roboto Light" size="18.0" />
+                                    </font>
+                                </Button>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                    <font>
+                        <Font name="Roboto Light" size="18.0" />
+                    </font>
+                </TitledPane>
+                <TitledPane layoutX="10.0" layoutY="10.0" prefHeight="307.0" prefWidth="769.0" text="View appointment patients" textFill="#05386b">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="279.0" prefWidth="767.0" style="-fx-background-color: #379683; -fx-border-width: 2px; -fx-border-color: #EDF5E1; -fx-border-radius: 2px;">
+                            <children>
+                                <TableView fx:id="currentPatientsTable" layoutX="15.0" layoutY="15.0" prefHeight="230.0" prefWidth="739.0" style="-fx-background-color: #379683; -fx-border-width: 2px; -fx-border-color: #EDF5E1; -fx-border-radius: 2px;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+                                    <columns>
+                                        <TableColumn fx:id="patientFirstNameColumn" prefWidth="111.0" text="First name" />
+                                        <TableColumn fx:id="patientLastNameColumn" prefWidth="114.0" text="Last name" />
+                                        <TableColumn fx:id="patientAddressColumn" prefWidth="102.0" text="Adress" />
+                                        <TableColumn fx:id="patientFacilityColumn" prefWidth="91.0" text="Facility" />
+                                        <TableColumn fx:id="patientPhoneNumberColumn" minWidth="0.0" prefWidth="123.0" text="Phone number" />
+                                        <TableColumn fx:id="patientDOBColumn" minWidth="0.0" prefWidth="78.0" text="DOB" />
+                                        <TableColumn fx:id="patientOibColumn" prefWidth="79.0" text="OIB" />
+                                        <TableColumn fx:id="patientImageURLColumn" prefWidth="35.0" text="Image URL" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                    <font>
+                        <Font name="Roboto Light" size="18.0" />
+                    </font>
+                </TitledPane>
+                <TitledPane layoutX="10.0" layoutY="47.0" prefHeight="307.0" prefWidth="769.0" text="View appointment providers" textFill="#05386b">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="279.0" prefWidth="767.0" style="-fx-background-color: #379683; -fx-border-width: 2px; -fx-border-color: #EDF5E1; -fx-border-radius: 2px;">
+                            <children>
+                                <TableView fx:id="currentProvidersTable" layoutX="14.0" layoutY="14.0" prefHeight="227.0" prefWidth="741.0" style="-fx-background-color: #379683; -fx-border-width: 2px; -fx-border-color: #EDF5E1; -fx-border-radius: 2px;">
+                                    <columns>
+                                        <TableColumn fx:id="providerFirstNameColumn" prefWidth="96.0" text="First name" />
+                                        <TableColumn fx:id="providerLastNameColumn" prefWidth="109.0" text="Last name" />
+                                        <TableColumn fx:id="providerAddressColumn" prefWidth="89.0" text="Adress" />
+                                        <TableColumn fx:id="providerFacilityColumn" prefWidth="113.0" text="Facility" />
+                                        <TableColumn fx:id="providerPhoneNumberColumn" minWidth="0.0" prefWidth="114.0" text="Phone number" />
+                                        <TableColumn fx:id="providerEmailColumn" minWidth="0.0" prefWidth="89.0" text="Email" />
+                                        <TableColumn fx:id="providerOibColumn" text="OIB" />
+                                        <TableColumn fx:id="providerImageURLColumn" prefWidth="36.0" text="Image URL" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                    <font>
+                        <Font name="Roboto Light" size="18.0" />
+                    </font>
+                </TitledPane>
+            </panes>
+        </Accordion>
     </children>
     <padding>
         <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />

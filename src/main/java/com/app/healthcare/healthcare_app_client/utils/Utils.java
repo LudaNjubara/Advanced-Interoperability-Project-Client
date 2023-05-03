@@ -11,6 +11,8 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,5 +48,16 @@ public class Utils {
         contextMenu.getItems().add(editMenuItem);
 
         return contextMenu;
+    }
+
+    public static LocalDate convertStringToLocalDate(String date) {
+        LocalDate returnedDate = null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        try {
+            returnedDate = LocalDate.parse(date, formatter);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return returnedDate;
     }
 }

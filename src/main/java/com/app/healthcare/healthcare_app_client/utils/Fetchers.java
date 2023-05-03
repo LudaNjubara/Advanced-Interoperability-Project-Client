@@ -121,7 +121,28 @@ public class Fetchers {
 
     public static Appointment[] fetchAllAppointmentsByProviderId(Long providerId) {
         Appointment[] returnedAppointments = null;
-        String URL = "http://localhost:8081/api/patients?providerId=" + providerId;
+        String URL = "http://localhost:8081/api/appointments?providerId=" + providerId;
+
+        RestTemplate restTemplate = setupRestTemplate();
+
+        try {
+            ResponseEntity<Appointment[]> responseEntity = restTemplate.getForEntity(URL, Appointment[].class);
+
+            if (responseEntity.getStatusCode().is2xxSuccessful()) {
+                returnedAppointments = responseEntity.getBody();
+            } else {
+                System.out.println("Request failed with status code: " + responseEntity.getStatusCode());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return returnedAppointments;
+    }
+
+    public static Appointment[] fetchAllAppointmentsByPatientId(Long patientId) {
+        Appointment[] returnedAppointments = null;
+        String URL = "http://localhost:8081/api/appointments?patientId=" + patientId;
 
         RestTemplate restTemplate = setupRestTemplate();
 
@@ -141,7 +162,7 @@ public class Fetchers {
     }
 
 
-
+    // FACILITY FETCHERS
     public static Facility[] fetchAllFacilities() {
         Facility[] returnedFacilities = null;
         String URL = "http://localhost:8081/api/facilities";
